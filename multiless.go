@@ -77,3 +77,7 @@ func (me Computation) MustLess() bool {
 	}
 	return less
 }
+
+func (me Computation) Float64(l, r float64) Computation {
+	return me.EagerSameLess(l == r, l < r)
+}
