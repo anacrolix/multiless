@@ -81,3 +81,10 @@ func (me Computation) MustLess() bool {
 func (me Computation) Float64(l, r float64) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
+
+func (me Computation) Lazy(f func() Computation) Computation {
+	if me.ok {
+		return me
+	}
+	return f()
+}
