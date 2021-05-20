@@ -66,6 +66,10 @@ func (me Computation) Less() bool {
 	return me.less
 }
 
+func (me Computation) Ok() bool {
+	return me.ok
+}
+
 func (me Computation) LessOk() (less, ok bool) {
 	return me.less, me.ok
 }
@@ -87,4 +91,12 @@ func (me Computation) Lazy(f func() Computation) Computation {
 		return me
 	}
 	return f()
+}
+
+func (me Computation) AndThen(then Computation) Computation {
+	if me.ok {
+		return me
+	} else {
+		return then
+	}
 }
