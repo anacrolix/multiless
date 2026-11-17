@@ -121,9 +121,14 @@ func (me Computation) OrderingInt() int {
 	}
 }
 
-// Applies builtin ordering if necessary. Not a method on Computation because methods can't
-// introduce new type parameters.
+// Applies builtin ordering if necessary.
+//
+// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
 func EagerOrdered[T constraints.Ordered](start Computation, l, r T) Computation {
+	return eagerOrdered(start, l, r)
+}
+
+func eagerOrdered[T constraints.Ordered](start Computation, l, r T) Computation {
 	if start.ok {
 		return start
 	}
