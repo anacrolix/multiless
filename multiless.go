@@ -30,10 +30,7 @@ func (me Computation) LazySameLess(lazy func() (same, less bool)) Computation {
 		return me
 	}
 	same, less := lazy()
-	if !same {
-		me.less = less
-	}
-	return me
+	return me.EagerSameLess(same, less)
 }
 
 // Sorts so that false comes before true.
