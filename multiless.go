@@ -62,8 +62,18 @@ func (me Computation) CmpInt64(i int64) Computation {
 	return me.EagerSameLess(i == 0, i < 0)
 }
 
-func (me Computation) Cmp(i int) Computation {
+// Then applies the sign of a three-way comparison result, such as from [cmp.Compare],
+// [bytes.Compare] or [time.Time.Compare], if the computation isn't decided yet: negative is less,
+// positive is greater, and zero leaves it undecided. It's named after Rust's [Ordering::then].
+//
+// [Ordering::then]: https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.then
+func (me Computation) Then(i int) Computation {
 	return me.EagerSameLess(i == 0, i < 0)
+}
+
+// Deprecated: Use [Computation.Then].
+func (me Computation) Cmp(i int) Computation {
+	return me.Then(i)
 }
 
 // Deprecated: Use [Computation.Compare] (requires Go 1.27).
