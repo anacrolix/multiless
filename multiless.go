@@ -38,22 +38,22 @@ func (me Computation) Bool(l, r bool) Computation {
 	return me.EagerSameLess(l == r, r)
 }
 
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func (me Computation) Uint32(l, r uint32) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
 
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func (me Computation) Int64(l, r int64) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
 
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func (me Computation) Uint64(l, r uint64) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
 
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func (me Computation) Int(l, r int) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
@@ -66,7 +66,7 @@ func (me Computation) Cmp(i int) Computation {
 	return me.EagerSameLess(i == 0, i < 0)
 }
 
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func (me Computation) Uintptr(l, r uintptr) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
@@ -91,7 +91,7 @@ func (me Computation) MustLess() bool {
 	return less
 }
 
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func (me Computation) Float64(l, r float64) Computation {
 	return me.EagerSameLess(l == r, l < r)
 }
@@ -126,7 +126,7 @@ func (me Computation) OrderingInt() int {
 
 // Applies builtin ordering if necessary.
 //
-// Deprecated: Use [Computation.EagerOrdered] (requires Go 1.27).
+// Deprecated: Use [Computation.Compare] (requires Go 1.27).
 func EagerOrdered[T constraints.Ordered](start Computation, l, r T) Computation {
 	return eagerOrdered(start, l, r)
 }
