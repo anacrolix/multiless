@@ -4,7 +4,9 @@ package multiless
 
 import "golang.org/x/exp/constraints"
 
-// Applies builtin ordering if necessary.
-func (me Computation) EagerOrdered[T constraints.Ordered](l, r T) Computation {
+// Compare applies the builtin ordering of l and r if the computation isn't decided yet. Unlike
+// [Computation.Cmp], which takes the result of a three-way comparison, it takes the two values.
+// Unlike [cmp.Compare], a NaN operand doesn't sort first: it decides the computation as not less.
+func (me Computation) Compare[T constraints.Ordered](l, r T) Computation {
 	return eagerOrdered(me, l, r)
 }
